@@ -68,7 +68,7 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
     private Iconos icoPlaneta1; // icono para nivel 1
     private Iconos icoPlaneta2; // icono para nivel 2
     private Iconos icoPlaneta3; // icono para nivel 3
-    private 
+    private Iconos icoPlaneta4; // icono para nivel 4
     /** 
      * AppletExamen
      * 
@@ -107,7 +107,7 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
         // creo imagen de home
         URL urlImagenHome = this.getClass().getResource("Instrucciones/home.png");
         // se crea la imagen de home
-        icoHome = new Iconos(50,50,
+        icoHome = new Iconos(30,50,
                 Toolkit.getDefaultToolkit().getImage(urlImagenHome));
         
         // creo imagen de planeta basico
@@ -152,6 +152,29 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
         icoCredits = new Iconos(285,465,
                 Toolkit.getDefaultToolkit().getImage(urlImagenNave));
         
+        // se crea la imagen nave
+        URL urlImagenPlaneta1 = this.getClass().getResource("Planetas/planet_1.png");
+         // se crea el objeto de Planeta1
+        icoPlaneta1 = new Iconos(200,55,
+                Toolkit.getDefaultToolkit().getImage(urlImagenPlaneta1));
+        
+        // se crea la imagen nave
+        URL urlImagenPlaneta2 = this.getClass().getResource("Planetas/planet_2.png");
+         // se crea el objeto de Planeta1
+        icoPlaneta2 = new Iconos(460,55,
+                Toolkit.getDefaultToolkit().getImage(urlImagenPlaneta2));
+        
+        // se crea la imagen nave
+        URL urlImagenPlaneta3 = this.getClass().getResource("Planetas/planet_3.png");
+         // se crea el objeto de Planeta3
+        icoPlaneta3 = new Iconos(50,300,
+                Toolkit.getDefaultToolkit().getImage(urlImagenPlaneta3));
+        
+        // se crea la imagen nave
+        URL urlImagenPlaneta4 = this.getClass().getResource("Planetas/planet_4.png");
+         // se crea el objeto de Planeta1
+        icoPlaneta4 = new Iconos(460,360,
+                Toolkit.getDefaultToolkit().getImage(urlImagenPlaneta4));
         addMouseListener(this);
     }
 	
@@ -219,8 +242,15 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
         }
         else if(icoHome.colisiona(mouEvent.getX(), mouEvent.getY())){
             booHome = false;
+            booPlanetas = false;
         }
         else if(icoBasic.colisiona(mouEvent.getX(), mouEvent.getY())){
+            booPlanetas = true;
+        }
+        else if(icoInter.colisiona(mouEvent.getX(), mouEvent.getY())){
+            booPlanetas = true;
+        }
+        else if(icoFinal.colisiona(mouEvent.getX(), mouEvent.getY())){
             booPlanetas = true;
         }
     } 
@@ -332,6 +362,22 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
                                     getImage(urlImagenPlanetas);
                     graDbg.drawImage(imaImagenPlanetas, 0, 0,
                     getWidth(), getHeight(), this);
+                    
+                     // Dibuja la imagen de planeta 1
+                    g.drawImage(icoPlaneta1.getImagen(), icoPlaneta1.getX(),
+                        icoPlaneta1.getY(), this);
+                    
+                    // Dibuja la imagen de planeta 2
+                    g.drawImage(icoPlaneta2.getImagen(), icoPlaneta2.getX(),
+                        icoPlaneta2.getY(), this);
+                    
+                    // Dibuja la imagen de planeta 3
+                    g.drawImage(icoPlaneta3.getImagen(), icoPlaneta3.getX(),
+                        icoPlaneta3.getY(), this);
+                    
+                    // Dibuja la imagen de planeta 4
+                    g.drawImage(icoPlaneta4.getImagen(), icoPlaneta4.getX(),
+                        icoPlaneta4.getY(), this);
                 }
             }
           
