@@ -64,7 +64,11 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
     private boolean booInstrucciones; // booleana para ver instrucciones
     private boolean booStart; // booleana para ver niveles
     private boolean booSonido; // booleana para configuraciones de sonido
-    
+    private boolean booPlanetas; //booleana para los planetas
+    private Iconos icoPlaneta1; // icono para nivel 1
+    private Iconos icoPlaneta2; // icono para nivel 2
+    private Iconos icoPlaneta3; // icono para nivel 3
+    private 
     /** 
      * AppletExamen
      * 
@@ -97,6 +101,9 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
         // inicializa la boleana de  Start
         booStart = false;
         
+        //inicialiaz la booleana de Planetas
+        booPlanetas = false;
+        
         // creo imagen de home
         URL urlImagenHome = this.getClass().getResource("Instrucciones/home.png");
         // se crea la imagen de home
@@ -118,7 +125,7 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
          // creo imagen de planeta final
         URL urlImagenAvanzado = this.getClass().getResource("Niveles/final.png");
         // se crea la imagen de final
-        icoFinal = new Iconos(300,600,
+        icoFinal = new Iconos(500,300,
                 Toolkit.getDefaultToolkit().getImage(urlImagenAvanzado));
         
         
@@ -213,7 +220,9 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
         else if(icoHome.colisiona(mouEvent.getX(), mouEvent.getY())){
             booHome = false;
         }
-        
+        else if(icoBasic.colisiona(mouEvent.getX(), mouEvent.getY())){
+            booPlanetas = true;
+        }
     } 
     public void mouseEntered(MouseEvent e) {
         // no hay codigo pero se debe escribir el metodo
@@ -306,12 +315,24 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
                     getWidth(), getHeight(), this);
                 
                 // Dibuja la imagen de planeta basico
-                g.drawImage(icoBasic.getImagen(), icoBasic.getX(), icoBasic.getY(), 
-                    this);
+                g.drawImage(icoBasic.getImagen(), icoBasic.getX(), 
+                        icoBasic.getY(), this);
                 
-                // Dibuja la imagen de planeta basico
-                g.drawImage(icoInter.getImagen(), icoInter.getX(), icoInter.getY(), 
-                    this);
+                // Dibuja la imagen de planeta inter
+                g.drawImage(icoInter.getImagen(), icoInter.getX(), 
+                        icoInter.getY(), this);
+                
+                // Dibuja la imagen de planeta avanzado
+                g.drawImage(icoFinal.getImagen(), icoFinal.getX(),
+                        icoFinal.getY(), this);
+                
+                if(booPlanetas){
+                    URL urlImagenPlanetas = this.getClass().getResource("Planetas/background.jpg");
+                        Image imaImagenPlanetas = Toolkit.getDefaultToolkit().
+                                    getImage(urlImagenPlanetas);
+                    graDbg.drawImage(imaImagenPlanetas, 0, 0,
+                    getWidth(), getHeight(), this);
+                }
             }
           
             
@@ -339,6 +360,7 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
                 g.drawImage(icoCredits.getImagen(), icoCredits.getX(),
                         icoCredits.getY(), this);
             }
+            
         }  
     }
 }
