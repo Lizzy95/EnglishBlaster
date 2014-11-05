@@ -50,6 +50,9 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
     private Graphics graDbg;
     private SoundClip souSonido;
     // agregar al diagrama
+    private Iconos icoBasic; // planeta del nivel basico
+    private Iconos icoInter; // planeta del nivel intermedio
+    private Iconos icoFinal; // planeta del nivel Avanzado
     private Iconos icoInstrucciones; //boton de instrucciones
     private Iconos icoStart; // boton para iniciar
     private Iconos icoContinuar; // boton para continuar un juego ya guardado
@@ -58,6 +61,9 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
     private Iconos icoSalir; // boton para salir
     private Iconos icoHome; // imagen para regresar al menu
     private boolean booHome; //booleana para saber cuando esta en home o no
+    private boolean booInstrucciones; // booleana para ver instrucciones
+    private boolean booStart; // booleana para ver niveles
+    private boolean booSonido; // booleana para configuraciones de sonido
     
     /** 
      * AppletExamen
@@ -84,13 +90,39 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
         
         // inicializa la boleana de home
         booHome = false;
+        
+        // inicializa la boleana de instrucciones
+        booInstrucciones = false;
+        
+        // inicializa la boleana de  Start
+        booStart = false;
+        
         // creo imagen de home
         URL urlImagenHome = this.getClass().getResource("Instrucciones/home.png");
-        
         // se crea la imagen de home
         icoHome = new Iconos(50,50,
                 Toolkit.getDefaultToolkit().getImage(urlImagenHome));
         
+        // creo imagen de planeta basico
+        URL urlImagenBasico = this.getClass().getResource("Niveles/basic.png");
+        // se crea la imagen de basico
+        icoBasic = new Iconos(100,100,
+                Toolkit.getDefaultToolkit().getImage(urlImagenHome));
+        
+         // creo imagen de planeta basico
+        URL urlImagenInter = this.getClass().getResource("Niveles/inter.png");
+        // se crea la imagen de basico
+        icoInter = new Iconos(400,100,
+                Toolkit.getDefaultToolkit().getImage(urlImagenHome));
+        
+         // creo imagen de planeta basico
+        URL urlImagenAvanzado = this.getClass().getResource("Niveles/final.png");
+        // se crea la imagen de basico
+        icoFinal = new Iconos(300,600,
+                Toolkit.getDefaultToolkit().getImage(urlImagenHome));
+        
+        
+        // se crea la imagen nave
         URL urlImagenNave = this.getClass().getResource("inicio/Nave.png");
         
         // se crea de Instrucciones 
@@ -148,7 +180,7 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
                se checa si hubo colisiones para desaparecer jugadores o corregir
                movimientos y se vuelve a pintar todo
             */ 
-            if(!booHome){
+            if( !booHome &&!booInstrucciones){
                 //actualiza();
                // checaColision();
                 repaint();
@@ -167,25 +199,11 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
     }
     public void mouseClicked(MouseEvent mouEvent) {
         if (icoInstrucciones.colisiona(mouEvent.getX(), mouEvent.getY())) {
-            System.out.println(" entra");
+            System.out.println("entra2");
+            
+            booInstrucciones = !booInstrucciones;
             booHome = !booHome;
-                
-        }
-        else if(icoHome.colisiona(mouEvent.getX(), mouEvent.getY())){
-            booHome = !booHome;
-        }
-        else if(icoStart.colisiona(mouEvent.getX(), mouEvent.getY())){
-            
-        }
-        else if(icoContinuar.colisiona(mouEvent.getX(), mouEvent.getY())){
-            
-        }
-        else if(icoSonido.colisiona(mouEvent.getX(), mouEvent.getY())){
-            
-        }
-        else if(icoCredits.colisiona(mouEvent.getX(), mouEvent.getY())){
-            
-        }
+        }       
     } 
     public void mouseEntered(MouseEvent e) {
         // no hay codigo pero se debe escribir el metodo
@@ -261,11 +279,15 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
      */
     public void paint1(Graphics g) {
         if (booHome) {
-            URL urlImagenAyuda = this.getClass().getResource("Instrucciones/instruccionesbg.jpg");
-            Image imaImagenJuego = Toolkit.getDefaultToolkit().
+            if(booInstrucciones){
+                System.out.println("sal");
+                URL urlImagenAyuda = this.getClass().getResource("Instrucciones/instruccionesbg.jpg");
+                Image imaImagenJuego = Toolkit.getDefaultToolkit().
                                     getImage(urlImagenAyuda);
-            graDbg.drawImage(imaImagenJuego, 0, 0,
+                graDbg.drawImage(imaImagenJuego, 0, 0,
                     getWidth(), getHeight(), this);
+            }
+          
             
             // Dibuja la imagend e home en la posicion actualizada
             g.drawImage(icoHome.getImagen(), icoHome.getX(), icoHome.getY(), 
@@ -291,7 +313,6 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
                 g.drawImage(icoCredits.getImagen(), icoCredits.getX(),
                         icoCredits.getY(), this);
             }
-        }
-        
+        }  
     }
 }
