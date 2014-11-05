@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+* El astronauta tendra que llegar a la nave esquivando la basura espacial y 
+*  entrando por la puerta con la escritura correcta de la palabra desplegada en
+*  la ventana de la nave. Contara con tres vidas para completar su mision y 
+*  llegar a la nave por su puerta indicada. se movera usando las flechas
  */
 
 /**
@@ -95,6 +96,15 @@ public class Nivel2 extends JFrame implements Runnable, MouseListener, MouseMoti
      * 
      */
     public void run () {
+        
+    }
+    /** 
+     * actualiza
+     * 
+     * Metodo que actualiza la posicion del objeto nena, camina y corredor
+     * 
+     */
+    public synchronized void actualiza(){
         
     }
     public void mouseClicked(MouseEvent mouEvent) {

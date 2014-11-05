@@ -49,6 +49,15 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
     private Image imaPaused; // imagen para cuando se pausa el juego
     private Graphics graDbg;
     private SoundClip souSonido;
+    // agregar al diagrama
+    private Iconos icoInstrucciones; //boton de instrucciones
+    private Iconos icoStart; // boton para iniciar
+    private Iconos icoContinuar; // boton para continuar un juego ya guardado
+    private Iconos icoSonido; // boton para configurar sonido
+    private Iconos icoCredits; // boton para ver creditos
+    private Iconos icoSalir; // boton para salir
+    private Iconos icoHome; // imagen para regresar al menu
+    private boolean booHome; //booleana para saber cuando esta en home o no
     
     /** 
      * AppletExamen
@@ -71,7 +80,40 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
      * En este metodo se inizializan las variables o se crean los objetos
      * a usarse en el <code>Applet</code> y se definen funcionalidades.
      */
-    public void init() {           
+    public void init() {    
+        
+        // inicializa la boleana de home
+        booHome = false;
+        // creo imagen de home
+        URL urlImagenHome = this.getClass().getResource("Instrucciones/home.png");
+        
+        // se crea la imagen de home
+        icoHome = new Iconos(50,50,
+                Toolkit.getDefaultToolkit().getImage(urlImagenHome));
+        
+        URL urlImagenNave = this.getClass().getResource("inicio/Nave.png");
+        
+        // se crea de Instrucciones 
+	icoInstrucciones = new Iconos(260,260,
+                Toolkit.getDefaultToolkit().getImage(urlImagenNave));
+        
+        // se crea el objeto de star
+        icoStart = new Iconos(485,315,
+                Toolkit.getDefaultToolkit().getImage(urlImagenNave));
+        
+        // se crea el objeto de Continuar
+        icoContinuar = new Iconos(230,365,
+                Toolkit.getDefaultToolkit().getImage(urlImagenNave));
+        
+        // se crea el objeto de Sonido
+        icoSonido = new Iconos(490,410,
+                Toolkit.getDefaultToolkit().getImage(urlImagenNave));
+        
+        // se crea el objeto de Creditos
+        icoCredits = new Iconos(285,465,
+                Toolkit.getDefaultToolkit().getImage(urlImagenNave));
+        
+        addMouseListener(this);
     }
 	
     /** 
@@ -100,10 +142,50 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
      * 
      */
     public void run () {
-        
+        // se realiza el ciclo del juego en este caso nunca termina
+        while (true) {
+            /* mientras dure el juego, se actualizan posiciones de jugadores
+               se checa si hubo colisiones para desaparecer jugadores o corregir
+               movimientos y se vuelve a pintar todo
+            */ 
+            if(!booHome){
+                //actualiza();
+               // checaColision();
+                repaint();
+            }
+            
+            try	{
+                // El thread se duerme.
+                Thread.sleep (20);
+            }
+            catch (InterruptedException iexError)	{
+                System.out.println("Hubo un error en el juego " + 
+                        iexError.toString());
+            }    
+	}
+          
     }
     public void mouseClicked(MouseEvent mouEvent) {
-        // no hay codigo pero se debe de escribir el metodo
+        if (icoInstrucciones.colisiona(mouEvent.getX(), mouEvent.getY())) {
+            System.out.println(" entra");
+            booHome = !booHome;
+                
+        }
+        else if(icoHome.colisiona(mouEvent.getX(), mouEvent.getY())){
+            booHome = !booHome;
+        }
+        else if(icoStart.colisiona(mouEvent.getX(), mouEvent.getY())){
+            
+        }
+        else if(icoContinuar.colisiona(mouEvent.getX(), mouEvent.getY())){
+            
+        }
+        else if(icoSonido.colisiona(mouEvent.getX(), mouEvent.getY())){
+            
+        }
+        else if(icoCredits.colisiona(mouEvent.getX(), mouEvent.getY())){
+            
+        }
     } 
     public void mouseEntered(MouseEvent e) {
         // no hay codigo pero se debe escribir el metodo
@@ -142,6 +224,29 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
      * 
      */
     public void paint (Graphics graGrafico){
+        // Inicializan el DoubleBuffer
+        if (imaDBImage == null){
+                imaDBImage = createImage (this.getSize().width, 
+                        this.getSize().height);
+                graDbg = imaDBImage.getGraphics ();
+        }
+
+        // creo imagen para el background
+        URL urlImagenFondo = this.getClass().getResource("Inicio/inicio.jpg");
+        Image imaImagenFondo = Toolkit.getDefaultToolkit().
+                                                getImage(urlImagenFondo);
+
+        // Despliego la imagen
+        graDbg.drawImage(imaImagenFondo, 0, 0, 
+                getWidth(), getHeight(), this);
+
+        // Actualiza el Foreground.
+        graDbg.setColor (getForeground());
+        paint1(graDbg);
+
+        // Dibuja la imagen actualizada
+        graGrafico.drawImage (imaDBImage, 0, 0, this);
+        
     }
     
     /**
@@ -155,5 +260,38 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
      * 
      */
     public void paint1(Graphics g) {
+        if (booHome) {
+            URL urlImagenAyuda = this.getClass().getResource("Instrucciones/instruccionesbg.jpg");
+            Image imaImagenJuego = Toolkit.getDefaultToolkit().
+                                    getImage(urlImagenAyuda);
+            graDbg.drawImage(imaImagenJuego, 0, 0,
+                    getWidth(), getHeight(), this);
+            
+            // Dibuja la imagend e home en la posicion actualizada
+            g.drawImage(icoHome.getImagen(), icoHome.getX(), icoHome.getY(), 
+                    this);
+        }
+        else{
+            if (icoInstrucciones != null && icoStart != null && icoContinuar != null && icoSonido != null && icoCredits != null) {
+            //Dibuja la imagen de Instrucciones en la posicion actualizada
+                g.drawImage(icoInstrucciones.getImagen(), icoInstrucciones.getX(),
+                        icoInstrucciones.getY(), this);
+                
+            //Dibuja la imagen de start en la posicion actualizada
+                g.drawImage(icoStart.getImagen(), icoStart.getX(),
+                        icoStart.getY(), this);
+                
+            //Dibuja la imagen de continuar en la posicion actualizada
+                g.drawImage(icoContinuar.getImagen(), icoContinuar.getX(),
+                        icoContinuar.getY(), this);
+            //Dibuja la imagen de sonido en la posicion actualizada
+                g.drawImage(icoSonido.getImagen(), icoSonido.getX(),
+                        icoSonido.getY(), this);
+            //Dibuja la imagen de creditos en la posicion actualizada
+                g.drawImage(icoCredits.getImagen(), icoCredits.getX(),
+                        icoCredits.getY(), this);
+            }
+        }
+        
     }
 }

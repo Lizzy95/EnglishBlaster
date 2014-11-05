@@ -1,6 +1,9 @@
+/*
+ * Memorama en el cual tendra qeu unir la imagen con la palabra que  la describa
+ */
 
 /**
- * // Escuchar una grabacion y escribir la palabra de lo que se escucho
+ *
  * @author Lizzi_
  */
 import java.awt.Graphics;
@@ -24,18 +27,20 @@ import java.util.LinkedList;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-public class Nivel1 extends JFrame implements Runnable, KeyListener {
-    private String sRespuesta; // variable para leer la respuesta
-    private SoundClip souPregunta; // varibale con la grabacion a oir
-    private Animacion animNave; // variable para el manejo de animacion
-    private Image imaFondo; // imagen de fondo
-    private Image imaInstrucciones; // imagen de instrucciones
-    private long lonTiempoActual;
-    private long lonTiempoInicial;
+public class Nivel3 extends JFrame implements Runnable, MouseListener, MouseMotionListener {
+    
+    private Animacion animPlaneta1; //objeto de la clase animacion
+    private Animacion animplaneta2; // objero de la clase animacion de planeta
+    private Iconos icoPlaneta1; // objeto de la clase iconos
+    private Iconos icoPlaneta2; // objeto de la clase iconos
+    private Image imaImagenFondo; // objeto para la imagen de fondo
+    private boolean booIguales; // variable para comprobar las palabras
 
     /** 
      * AppletExamen
@@ -44,7 +49,7 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
      * correr el juego
      * 
      */ 
-    public Nivel1() {
+    public Nivel3() {
        setSize(800, 600); //define tamaño del JFrame
        init();
        start();
@@ -58,8 +63,7 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
      * En este metodo se inizializan las variables o se crean los objetos
      * a usarse en el <code>Applet</code> y se definen funcionalidades.
      */
-    public void init() {
-      
+    public void init() {           
     }
 	
     /** 
@@ -88,9 +92,8 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
      * 
      */
     public void run () {
-          
+        
     }
-	
     /** 
      * actualiza
      * 
@@ -98,56 +101,36 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
      * 
      */
     public synchronized void actualiza(){
-        
     }
-	
-    /**
-     * checaColision
-     * 
-     * Metodo usado para checar la colision del objeto nena, camina y corre
-     * con las orillas del <code>Applet</code>.
-     * 
-     */
-    public synchronized void checaPalabra(){
-        
-    }       
-   
-     /**
-     * keyPressed
-     * 
-     * Metodo sobrescrito de la interface <code>KeyListener</code>.<P>
-     * En este metodo maneja el evento que se genera al dejar presionada
-     * alguna tecla.
-     * @param keyEvent es el <code>evento</code> generado al presionar.
-     * 
-     */
-    public void keyPressed(KeyEvent keyEvent) {
+    public void mouseClicked(MouseEvent mouEvent) {
+        // no hay codigo pero se debe de escribir el metodo
+    } 
+    public void mouseEntered(MouseEvent e) {
+        // no hay codigo pero se debe escribir el metodo
+    }
+     
+    public void mouseExited(MouseEvent e) {
+        // no hay codigo pero e debe escribir el metodo
+    }
+    
+    public void mousePressed(MouseEvent mouEvent) {
+    }
+    
+    
+    public void mouseDragged(MouseEvent mouEvent){
 
     }
-    
-    /**
-     * keyTyped
-     * 
-     * Metodo sobrescrito de la interface <code>KeyListener</code>.<P>
-     * En este metodo maneja el evento que se genera al presionar una 
-     * tecla que no es de accion.
-     * @param e es el <code>evento</code> que se genera en al presionar.
-     * 
-     */
-    public void keyTyped(KeyEvent e){
-    	// no hay codigo pero se debe escribir el metodo
-    }
-    
-    /**
-     * keyReleased
-     * Metodo sobrescrito de la interface <code>KeyListener</code>.<P>
-     * En este metodo maneja el evento que se genera al soltar la tecla.
-     * @param e es el <code>evento</code> que se genera en al soltar las teclas.
-     */
-    public void keyReleased(KeyEvent keyEvent){
+
+      public void mouseReleased(MouseEvent e) {
         
-    }
-    
+      }
+      
+
+      
+      public void mouseMoved(MouseEvent mouEvent)
+      {
+          // no tiene codigo pero se pone el metodo
+      }
      /**
      * paint
      * 
@@ -159,7 +142,6 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
      * 
      */
     public void paint (Graphics graGrafico){
-       
     }
     
     /**
@@ -173,7 +155,5 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
      * 
      */
     public void paint1(Graphics g) {
-        
-           
     }
 }
