@@ -199,11 +199,16 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
     }
     public void mouseClicked(MouseEvent mouEvent) {
         if (icoInstrucciones.colisiona(mouEvent.getX(), mouEvent.getY())) {
-            System.out.println("entra2");
             
             booInstrucciones = !booInstrucciones;
-            booHome = !booHome;
-        }       
+            booHome = true;
+        }
+        else if (icoStart.colisiona(mouEvent.getX(), mouEvent.getY())) {
+            
+            booStart = !booStart;
+            booHome = true;
+        }
+        
     } 
     public void mouseEntered(MouseEvent e) {
         // no hay codigo pero se debe escribir el metodo
@@ -286,6 +291,9 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
                                     getImage(urlImagenAyuda);
                 graDbg.drawImage(imaImagenJuego, 0, 0,
                     getWidth(), getHeight(), this);
+            }
+            if(booStart){
+                
             }
           
             
