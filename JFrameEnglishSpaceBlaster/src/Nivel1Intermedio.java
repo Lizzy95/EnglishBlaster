@@ -28,7 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class Nivel1 extends JFrame implements Runnable, KeyListener {
+public class Nivel1Intermedio extends JFrame implements Runnable, KeyListener {
     private String sRespuesta; // variable para leer la respuesta
     private SoundClip souPregunta; // varibale con la grabacion a oir
     private Animacion animNave; // variable para el manejo de animacion
@@ -49,7 +49,7 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
      * correr el juego
      * 
      */ 
-    public Nivel1() {
+    public Nivel1Intermedio() {
        setSize(800, 600); //define tamaño del JFrame
        init();
        start();
