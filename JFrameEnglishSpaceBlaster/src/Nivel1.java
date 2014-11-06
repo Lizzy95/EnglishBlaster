@@ -229,7 +229,7 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
      */
     public void paint1(Graphics g) {
         
-        if (!booInstrucciones) {
+        if (booInstrucciones) {
             System.out.println("sal");
             URL urlImagenAyuda = this.getClass().getResource("Instrucciones Planeta1/Sprites_Videojuego.jpg");
             imaInstrucciones = Toolkit.getDefaultToolkit().

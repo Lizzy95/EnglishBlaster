@@ -61,6 +61,9 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
     private boolean booStart; // booleana para ver niveles
     private boolean booSonido; // booleana para configuraciones de sonido
     private boolean booPlanetas; //booleana para los planetas
+    private boolean booIntermedio; // boleana para ver habilidad
+    private boolean booBasico; // booleana para ver el nivel de habilidad
+    private boolean booFinal; // booleana para ver el nivel final de habilidad
     private Iconos icoPlaneta1; // icono para nivel 1
     private Iconos icoPlaneta2; // icono para nivel 2
     private Iconos icoPlaneta3; // icono para nivel 3
@@ -102,6 +105,15 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
         
         // inicializa la booleana en falso
         booCredits = false;
+        
+        //inicializa la booleana en falso
+        booBasico = false;
+        
+        //inicializa la booleana en falso
+        booIntermedio = false;
+        
+        //inicializa la booleana en falso
+        booFinal = false;
         
         // creo imagen de home
         URL urlImagenHome = this.getClass().getResource("Instrucciones/home.png");
@@ -250,21 +262,69 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
         }
         else if(icoBasic.colisiona(mouEvent.getX(), mouEvent.getY())){
             booPlanetas = true;
+            booBasico = true;
         }
         else if(icoInter.colisiona(mouEvent.getX(), mouEvent.getY())){
             booPlanetas = true;
+            booIntermedio = true;
         }
         else if(icoFinal.colisiona(mouEvent.getX(), mouEvent.getY())){
             booPlanetas = true;
+            booFinal = true;
         }
         else if (icoPlaneta1.colisiona(mouEvent.getX(), mouEvent.getY())) {
-          //  System.out.println("entra");
-            Nivel1  juego1 = new Nivel1 (); // objeto de la clase applet
-            juego1.setSize(800,600);// tamaño del juego
-            juego1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
-            //juego
-            juego1.setVisible(true); // para que se vea el juego
+            if (booBasico) {
+                //  System.out.println("entra");
+                Nivel1  juego1 = new Nivel1 (); // objeto de la clase applet
+                juego1.setSize(800,600);// tamaño del juego
+                juego1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego1.setVisible(true); // para que se vea el juego
+            }
+            else if(booIntermedio){
+                //  System.out.println("entra");
+                Nivel1Intermedio  juego1 = new Nivel1Intermedio (); // objeto de la clase applet
+                juego1.setSize(800,600);// tamaño del juego
+                juego1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego1.setVisible(true); // para que se vea el juego
+            }
+            else if(booFinal){
+                //  System.out.println("entra");
+                Nivel1Final  juego1 = new Nivel1Final (); // objeto de la clase applet
+                juego1.setSize(800,600);// tamaño del juego
+                juego1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego1.setVisible(true); // para que se vea el juego
+            }
         }
+        else if (icoPlaneta2.colisiona(mouEvent.getX(), mouEvent.getY())) {
+            if (booBasico) {
+                //  System.out.println("entra");
+                Nivel2  juego2 = new Nivel2 (); // objeto de la clase applet
+                juego2.setSize(800,600);// tamaño del juego
+                juego2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego2.setVisible(true); // para que se vea el juego
+            }
+            else if(booIntermedio){
+                //  System.out.println("entra");
+                Nivel2Intermedio  juego2 = new Nivel2Intermedio (); // objeto de la clase applet
+                juego2.setSize(800,600);// tamaño del juego
+                juego2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego2.setVisible(true); // para que se vea el juego
+            }
+            else if(booFinal){
+                //  System.out.println("entra");
+                Nivel2Final  juego2 = new Nivel2Final (); // objeto de la clase applet
+                juego2.setSize(800,600);// tamaño del juego
+                juego2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego2.setVisible(true); // para que se vea el juego
+            }
+        }
+        
     } 
     public void mouseEntered(MouseEvent e) {
         // no hay codigo pero se debe escribir el metodo

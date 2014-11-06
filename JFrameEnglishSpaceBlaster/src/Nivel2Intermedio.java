@@ -38,14 +38,19 @@ import java.util.logging.Logger;
 
 public class Nivel2Intermedio extends JFrame implements Runnable, MouseListener, MouseMotionListener {
     
-    private Iconos icoAstrounata; // objeto astrounata de la clase Iconos
+    private Iconos icoAstronauta; // objeto astrounata de la clase Iconos
     private Iconos icoNave; // objeto nave de la clase Iconos 
     private Image imaImagenFondo; // imagen de fondo
     private Image imaPause; // iimagen de pausa
     private boolean booPausa; // boleana para contron de pausa
-    private Animacion animAustronauta; // variable de animacion
+    private Animacion animAstronauta; // variable de animacion
     private Animacion animNave; // variable nave de animacion
-
+    // agregar al diagrama
+    private Image imaInstrucciones; // imagen de instrucciones
+    private boolean booInstrucciones;
+    private Iconos icoContinuar; // iciono para empezar el juego
+    private Image imaDBImage; // imagend e fondo
+    private Graphics graDbg;
     /** 
      * AppletExamen
      * 
@@ -67,7 +72,30 @@ public class Nivel2Intermedio extends JFrame implements Runnable, MouseListener,
      * En este metodo se inizializan las variables o se crean los objetos
      * a usarse en el <code>Applet</code> y se definen funcionalidades.
      */
-    public void init() {           
+    public void init() {      
+        //inicializa la booleana en true
+        booInstrucciones  = true;
+        
+        // creo imagen de continuar
+        URL urlImagenContinuar = this.getClass().getResource("go.png");
+        // se crea la imagen de  continuaar
+        icoContinuar = new Iconos(50,50,
+                Toolkit.getDefaultToolkit().getImage(urlImagenContinuar));
+        
+        URL urlImagenAstronauta = this.getClass().getResource("Nivel 2/astronauta.png");
+        //se crea la imagen de austronauta
+        icoAstronauta = new Iconos((getWidth()/2), getHeight(),
+                Toolkit.getDefaultToolkit().getImage(urlImagenAstronauta));
+        icoAstronauta.setY(getHeight()-icoAstronauta.getAlto());
+        icoAstronauta.setX((getWidth()/2)-(icoAstronauta.getAncho()/2));
+        
+        URL urlImagenNave = this.getClass().getResource("Nivel 2/navenivel2.png");
+        //se crea la imagen de nave
+        icoNave = new Iconos(getWidth()/2, 20,
+                Toolkit.getDefaultToolkit().getImage(urlImagenNave));
+        icoNave.setX((getWidth()/2)-(icoNave.getAncho()/2));
+        
+        addMouseListener(this);
     }
 	
     /** 
@@ -96,7 +124,27 @@ public class Nivel2Intermedio extends JFrame implements Runnable, MouseListener,
      * 
      */
     public void run () {
-        
+        // se realiza el ciclo del juego en este caso nunca termina
+        while (true) {
+            /* mientras dure el juego, se actualizan posiciones de jugadores
+               se checa si hubo colisiones para desaparecer jugadores o corregir
+               movimientos y se vuelve a pintar todo
+            */ 
+            if(!booInstrucciones){
+                //actualiza();
+               // checaColision();
+                repaint();
+            }
+            
+            try	{
+                // El thread se duerme.
+                Thread.sleep (20);
+            }
+            catch (InterruptedException iexError)	{
+                System.out.println("Hubo un error en el juego " + 
+                        iexError.toString());
+            }    
+	}             
     }
     /** 
      * actualiza
@@ -108,7 +156,10 @@ public class Nivel2Intermedio extends JFrame implements Runnable, MouseListener,
         
     }
     public void mouseClicked(MouseEvent mouEvent) {
-        // no hay codigo pero se debe de escribir el metodo
+        if (icoContinuar.colisiona(mouEvent.getX(), mouEvent.getY())) {
+            System.out.println("entra");
+            booInstrucciones = false;
+        }
     } 
     public void mouseEntered(MouseEvent e) {
         // no hay codigo pero se debe escribir el metodo
@@ -147,6 +198,28 @@ public class Nivel2Intermedio extends JFrame implements Runnable, MouseListener,
      * 
      */
     public void paint (Graphics graGrafico){
+        // Inicializan el DoubleBuffer
+        if (imaDBImage == null){
+                imaDBImage = createImage (this.getSize().width, 
+                        this.getSize().height);
+                graDbg = imaDBImage.getGraphics ();
+        }
+
+        // creo imagen para el background
+        URL urlImagenFondo = this.getClass().getResource("Nivel 2/background.jpg");
+        imaImagenFondo = Toolkit.getDefaultToolkit().
+                                                getImage(urlImagenFondo);
+
+        // Despliego la imagen
+        graDbg.drawImage(imaImagenFondo, 0, 0, 
+                getWidth(), getHeight(), this);
+
+        // Actualiza el Foreground.
+        graDbg.setColor (getForeground());
+        paint1(graDbg);
+
+        // Dibuja la imagen actualizada
+        graGrafico.drawImage (imaDBImage, 0, 0, this);
     }
     
     /**
@@ -160,5 +233,30 @@ public class Nivel2Intermedio extends JFrame implements Runnable, MouseListener,
      * 
      */
     public void paint1(Graphics g) {
+        
+        if (booInstrucciones) {
+            System.out.println("sal");
+            URL urlImagenAyuda = this.getClass().getResource("Instrucciones Planeta2/Sprites_Videojuego.jpg");
+            imaInstrucciones = Toolkit.getDefaultToolkit().
+                                    getImage(urlImagenAyuda);
+            graDbg.drawImage(imaInstrucciones, 0, 0,
+                    getWidth(), getHeight(), this);
+            
+            //Dibuja la imagen de continuar en la posicion actualizada
+            g.drawImage(icoContinuar.getImagen(), icoContinuar.getX(),
+                    icoContinuar.getY(), this);            
+        }
+        else
+        {
+            if (icoNave != null && icoAstronauta != null) {
+                //Dibuja la imagen de nave en la posicion actualizada
+                g.drawImage(icoNave.getImagen(), icoNave.getX(), 
+                        icoNave.getY(), this);
+                
+                //Dibuja la imagen del astronauta actualizada
+                g.drawImage(icoAstronauta.getImagen(), icoAstronauta.getX(),
+                        icoAstronauta.getY(), this);
+            }
+        }
     }
 }
