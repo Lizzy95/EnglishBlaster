@@ -64,6 +64,7 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
     private boolean booIntermedio; // boleana para ver habilidad
     private boolean booBasico; // booleana para ver el nivel de habilidad
     private boolean booFinal; // booleana para ver el nivel final de habilidad
+    private boolean booINivel1; // booleana para ver el nivel 1
     private Iconos icoPlaneta1; // icono para nivel 1
     private Iconos icoPlaneta2; // icono para nivel 2
     private Iconos icoPlaneta3; // icono para nivel 3
@@ -115,6 +116,9 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
         //inicializa la booleana en falso
         booFinal = false;
         
+        //inicializa la booleana en falso
+        booINivel1 = false;
+        
         // creo imagen de home
         URL urlImagenHome = this.getClass().getResource("Instrucciones/home.png");
         // se crea la imagen de home
@@ -130,13 +134,13 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
          // creo imagen de planeta inter
         URL urlImagenInter = this.getClass().getResource("Niveles/inter.png");
         // se crea la imagen de inter
-        icoInter = new Iconos(50,300,
+        icoInter = new Iconos(130,300,
                 Toolkit.getDefaultToolkit().getImage(urlImagenInter));
         
          // creo imagen de planeta final
         URL urlImagenAvanzado = this.getClass().getResource("Niveles/final.png");
         // se crea la imagen de final
-        icoFinal = new Iconos(500,300,
+        icoFinal = new Iconos(500,250,
                 Toolkit.getDefaultToolkit().getImage(urlImagenAvanzado));
         
         
@@ -178,14 +182,15 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
         // se crea la imagen nave
         URL urlImagenPlaneta3 = this.getClass().getResource("Planetas/planet_3.png");
          // se crea el objeto de Planeta3
-        icoPlaneta3 = new Iconos(50,300,
+        icoPlaneta3 = new Iconos(20,260,
                 Toolkit.getDefaultToolkit().getImage(urlImagenPlaneta3));
         
         // se crea la imagen nave
         URL urlImagenPlaneta4 = this.getClass().getResource("Planetas/planet_4.png");
          // se crea el objeto de Planeta1
-        icoPlaneta4 = new Iconos(460,360,
+        icoPlaneta4 = new Iconos(460,400,
                 Toolkit.getDefaultToolkit().getImage(urlImagenPlaneta4));
+        
         addMouseListener(this);
     }
 	
@@ -273,14 +278,14 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
             booFinal = true;
         }
         else if (icoPlaneta1.colisiona(mouEvent.getX(), mouEvent.getY())) {
-            if (booBasico) {
+            if(booBasico){
                 //  System.out.println("entra");
-                Nivel1  juego1 = new Nivel1 (); // objeto de la clase applet
-                juego1.setSize(800,600);// tamaño del juego
-                juego1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                Nivel1  juego = new Nivel1 (); // objeto de la clase applet
+                juego.setSize(800,600);// tamaño del juego
+                juego.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
                 //juego
-                juego1.setVisible(true); // para que se vea el juego
-            }
+                juego.setVisible(true); // para que se vea el juego
+            }   
             else if(booIntermedio){
                 //  System.out.println("entra");
                 Nivel1Intermedio  juego1 = new Nivel1Intermedio (); // objeto de la clase applet
@@ -324,7 +329,60 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
                 juego2.setVisible(true); // para que se vea el juego
             }
         }
-        
+        else if (icoPlaneta3.colisiona(mouEvent.getX(), mouEvent.getY())) {
+            System.out.println("entra");
+            if (booBasico) {
+                 System.out.println("entra");
+                Nivel3  juego3 = new Nivel3 (); // objeto de la clase applet
+                juego3.setSize(800,600);// tamaño del juego
+                juego3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego3.setVisible(true); // para que se vea el juego
+            }
+            else if(booIntermedio){
+                //  System.out.println("entra");
+                Nivel3Intermedio  juego3 = new Nivel3Intermedio (); // objeto de la clase applet
+                juego3.setSize(800,600);// tamaño del juego
+                juego3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego3.setVisible(true); // para que se vea el juego
+            }
+            else if(booFinal){
+                //  System.out.println("entra");
+                Nivel3Final  juego3 = new Nivel3Final (); // objeto de la clase applet
+                juego3.setSize(800,600);// tamaño del juego
+                juego3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego3.setVisible(true); // para que se vea el juego
+            }
+        }
+        else if (icoPlaneta4.colisiona(mouEvent.getX(), mouEvent.getY())) {
+            System.out.println("entra");
+            if (booBasico) {
+                 System.out.println("entra");
+                Nivel4  juego4 = new Nivel4 (); // objeto de la clase applet
+                juego4.setSize(800,600);// tamaño del juego
+                juego4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego4.setVisible(true); // para que se vea el juego
+            }
+            else if(booIntermedio){
+                //  System.out.println("entra");
+                Nivel4Intermedio  juego4 = new Nivel4Intermedio (); // objeto de la clase applet
+                juego4.setSize(800,600);// tamaño del juego
+                juego4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego4.setVisible(true); // para que se vea el juego
+            }
+            else if(booFinal){
+                //  System.out.println("entra");
+                Nivel4Final  juego4 = new Nivel4Final (); // objeto de la clase applet
+                juego4.setSize(800,600);// tamaño del juego
+                juego4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego4.setVisible(true); // para que se vea el juego
+            }
+        }      
     } 
     public void mouseEntered(MouseEvent e) {
         // no hay codigo pero se debe escribir el metodo
@@ -435,7 +493,8 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
                     graDbg.drawImage(imaImagenPlanetas, 0, 0,
                     getWidth(), getHeight(), this);
                     
-                     // Dibuja la imagen de planeta 1
+                    if (icoPlaneta1 != null && icoPlaneta2 != null && icoPlaneta3 != null && icoPlaneta4 != null) {
+                        // Dibuja la imagen de planeta 1
                     g.drawImage(icoPlaneta1.getImagen(), icoPlaneta1.getX(),
                         icoPlaneta1.getY(), this);
                     
@@ -450,6 +509,8 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
                     // Dibuja la imagen de planeta 4
                     g.drawImage(icoPlaneta4.getImagen(), icoPlaneta4.getX(),
                         icoPlaneta4.getY(), this);
+                    }
+                     
                 }
             }
             else if(booCredits){
@@ -487,6 +548,7 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
                         icoCredits.getY(), this);
             }
             
-        }  
+        } 
+        
     }
 }

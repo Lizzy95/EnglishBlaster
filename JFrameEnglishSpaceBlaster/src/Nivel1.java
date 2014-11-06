@@ -26,9 +26,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 
-public class Nivel1 extends JFrame implements Runnable, KeyListener {
+public class Nivel1 extends JFrame implements Runnable, KeyListener, MouseListener, MouseMotionListener{
     private String sRespuesta; // variable para leer la respuesta
     private SoundClip souPregunta; // varibale con la grabacion a oir
     private Animacion animNave; // variable para el manejo de animacion
@@ -41,6 +44,14 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
     // agregar al diagrama
     private boolean booInstrucciones;
     private Iconos icoContinuar; // iciono para empezar el juego
+    private Iconos icoNave; // icono de la nave
+    private Iconos icoPlaneta1; // icono de la planeta
+    private Iconos icoPlaneta3; //icono de la planeta
+    private Iconos icoPlaneta2; //icono de planeta
+    private Iconos icoFlecha; //icono auxiliar
+    private Iconos icoContinue; // icono de continuar
+    private Iconos icoSelect; // icono de select
+    private boolean booFlecha;
 
     /** 
      * AppletExamen
@@ -65,15 +76,60 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
      */
     public void init() {
       setSize(800, 600);
-      
+     
       // inicializa instrucciones
       booInstrucciones = true;
+      
+      booFlecha = false;
       
       // creo imagen de continuar
         URL urlImagenAvanzado = this.getClass().getResource("go.png");
         // se crea la imagen de final
         icoContinuar = new Iconos(50,50,
                 Toolkit.getDefaultToolkit().getImage(urlImagenAvanzado));
+        
+        // creo imagen de continue
+        URL urlImagenContinue = this.getClass().getResource("LevelSelect/continue.png");
+        // se crea la imagen de final
+        icoContinue = new Iconos(400,200,
+                Toolkit.getDefaultToolkit().getImage(urlImagenContinue));
+        
+        // creo imagen de select
+        URL urlImagenSelect = this.getClass().getResource("LevelSelect/selectselect.png");
+        // se crea la imagen de final
+        icoSelect = new Iconos(50,200,
+                Toolkit.getDefaultToolkit().getImage(urlImagenSelect));
+        
+        // creo imagen de nave
+        URL urlImagenNave = this.getClass().getResource("Nivel 1/Nave.png");
+        // se crea la imagen de planeta 1
+        icoNave = new Iconos(200, 50,
+                Toolkit.getDefaultToolkit().getImage(urlImagenNave));
+        icoNave.setX((getWidth()/2) - (icoNave.getAncho()/2));
+        
+        // creo imagen de planeta 1
+        URL urlImagenPlaneta1 = this.getClass().getResource("Nivel 1/1.png");
+        // se crea la imagen de planeta 1
+        icoPlaneta1 = new Iconos(600, 450,
+                Toolkit.getDefaultToolkit().getImage(urlImagenPlaneta1));
+        
+         // creo imagen de planeta 2
+        URL urlImagenPlaneta2 = this.getClass().getResource("Nivel 1/2.png");
+        // se crea la imagen de planeta 2
+        icoPlaneta2 = new Iconos(400, 450,
+                Toolkit.getDefaultToolkit().getImage(urlImagenPlaneta2));
+        
+         // creo imagen de planeta 3
+        URL urlImagenPlaneta3 = this.getClass().getResource("Nivel 1/3.png");
+        // se crea la imagen de planeta 3
+        icoPlaneta3 = new Iconos(50, 400,
+                Toolkit.getDefaultToolkit().getImage(urlImagenPlaneta3));
+        
+        URL urlImagenFlecha = this.getClass().getResource("flecha.png");
+        icoFlecha = new Iconos(100, 100,
+                Toolkit.getDefaultToolkit().getImage(urlImagenFlecha));
+        
+         addMouseListener(this);
     }
 	
     /** 
@@ -113,11 +169,11 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
                // checaColision();
                 repaint();
             }
-            
+    
             try	{
                 // El thread se duerme.
                 Thread.sleep (20);
-            }
+    }
             catch (InterruptedException iexError)	{
                 System.out.println("Hubo un error en el juego " + 
                         iexError.toString());
@@ -182,6 +238,50 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
         
     }
     
+    public void mouseClicked(MouseEvent mouEvent) {
+       if (icoContinuar.colisiona(mouEvent.getX(), mouEvent.getY())) {
+          //  System.out.println("entra");
+            booInstrucciones = false;
+        }
+       else if(icoFlecha.colisiona(mouEvent.getX(), mouEvent.getY())){
+           booFlecha = true; 
+       }
+       else if(icoContinue.colisiona(mouEvent.getX(), mouEvent.getY())){
+       //  System.out.println("entra");
+                Nivel2  juego2 = new Nivel2 (); // objeto de la clase applet
+                juego2.setSize(800,600);// tamaño del juego
+                juego2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+                //juego
+                juego2.setVisible(true); // para que se vea el juego
+       }
+           
+    } 
+    public void mouseEntered(MouseEvent e) {
+        // no hay codigo pero se debe escribir el metodo
+    }
+     
+    public void mouseExited(MouseEvent e) {
+        // no hay codigo pero e debe escribir el metodo
+    }
+    
+    public void mousePressed(MouseEvent mouEvent) {
+    }
+    
+    
+    public void mouseDragged(MouseEvent mouEvent){
+
+    }
+
+    public void mouseReleased(MouseEvent e) {
+        
+    }
+      
+
+      
+      public void mouseMoved(MouseEvent mouEvent)
+      {
+          // no tiene codigo pero se pone el metodo
+      }
      /**
      * paint
      * 
@@ -199,7 +299,7 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
                         this.getSize().height);
                 graDbg = imaDBImage.getGraphics ();
         }
-
+    
         // creo imagen para el background
         URL urlImagenFondo = this.getClass().getResource("Nivel 1/background.jpg");
         imaImagenFondo = Toolkit.getDefaultToolkit().
@@ -230,7 +330,7 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
     public void paint1(Graphics g) {
         
         if (booInstrucciones) {
-            System.out.println("sal");
+         //  System.out.println("sal");
             URL urlImagenAyuda = this.getClass().getResource("Instrucciones Planeta1/Sprites_Videojuego.jpg");
             imaInstrucciones = Toolkit.getDefaultToolkit().
                                     getImage(urlImagenAyuda);
@@ -241,9 +341,41 @@ public class Nivel1 extends JFrame implements Runnable, KeyListener {
             g.drawImage(icoContinuar.getImagen(), icoContinuar.getX(),
                     icoContinuar.getY(), this);            
         }
+        else if(booFlecha){
+            URL urlImagenAyuda = this.getClass().getResource("LevelSelect/background.jpg");
+           Image imaLevel = Toolkit.getDefaultToolkit().
+                                    getImage(urlImagenAyuda);
+            graDbg.drawImage(imaLevel, 0, 0,
+                    getWidth(), getHeight(), this);
+            
+            g.drawImage(icoContinue.getImagen(), icoContinue.getX(),
+                    icoContinue.getY(), this);  
+            
+            g.drawImage(icoSelect.getImagen(), icoSelect.getX(),
+                    icoSelect.getY(), this);            
+        }
         else
         {
-            
+           if (icoPlaneta1 != null && icoPlaneta2 != null && icoPlaneta3 != null && icoNave != null) {
+            //Dibuja la imagen de planeta1 en la posicion actualizada 
+                g.drawImage(icoPlaneta1.getImagen(), icoPlaneta1.getX(),
+                    icoPlaneta1.getY(), this);
+                
+                //Dibuja la imagen de planeta1 en la posicion actualizada 
+                g.drawImage(icoPlaneta2.getImagen(), icoPlaneta2.getX(),
+                    icoPlaneta2.getY(), this);
+                
+                //Dibuja la imagen de planeta1 en la posicion actualizada 
+                g.drawImage(icoPlaneta3.getImagen(), icoPlaneta3.getX(),
+                    icoPlaneta3.getY(), this);
+                
+                //Dibuja la imagen de planeta1 en la posicion actualizada 
+                g.drawImage(icoNave.getImagen(), icoNave.getX(),
+                    icoNave.getY(), this);
+                
+                g.drawImage(icoFlecha.getImagen(), icoFlecha.getX(), 
+                        icoFlecha.getY(), this);
+            }
         }
            
     }
