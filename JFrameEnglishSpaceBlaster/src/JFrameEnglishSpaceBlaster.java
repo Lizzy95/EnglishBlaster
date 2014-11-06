@@ -233,13 +233,13 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
     }
     public void mouseClicked(MouseEvent mouEvent) {
         if (icoInstrucciones.colisiona(mouEvent.getX(), mouEvent.getY())) {
-            System.out.println("entra");
+           // System.out.println("entra");
             booInstrucciones = true;
             booHome = true;
             booStart = false;
         }
         else if (icoStart.colisiona(mouEvent.getX(), mouEvent.getY())) {
-            System.out.println("entra");
+            //System.out.println("entra");
             booStart = true;
             booHome = true;
             booInstrucciones = false;
@@ -261,6 +261,14 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
         }
         else if(icoFinal.colisiona(mouEvent.getX(), mouEvent.getY())){
             booPlanetas = true;
+        }
+        else if (icoPlaneta1.colisiona(mouEvent.getX(), mouEvent.getY())) {
+          //  System.out.println("entra");
+            Nivel1  juego1 = new Nivel1 (); // objeto de la clase applet
+            juego1.setSize(800,600);// tamaño del juego
+            juego1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// para cerrar 
+            //juego
+            juego1.setVisible(true); // para que se vea el juego
         }
     } 
     public void mouseEntered(MouseEvent e) {
@@ -338,7 +346,7 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
     public void paint1(Graphics g) {
         if (booHome) {
             if(booInstrucciones){
-                System.out.println("sal");
+                //System.out.println("sal");
                 URL urlImagenAyuda = this.getClass().getResource("Instrucciones/instruccionesbg.jpg");
                 Image imaImagenJuego = Toolkit.getDefaultToolkit().
                                     getImage(urlImagenAyuda);
@@ -346,7 +354,7 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
                     getWidth(), getHeight(), this);
             }
             else if(booStart){
-                System.out.println("sal");
+                //System.out.println("sal");
                 URL urlImagenAyuda = this.getClass().getResource("Niveles/background.jpg");
                 Image imaImagenJuego = Toolkit.getDefaultToolkit().
                                     getImage(urlImagenAyuda);
