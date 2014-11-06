@@ -62,6 +62,7 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
     private Iconos icoHome; // imagen para regresar al menu
     private boolean booHome; //booleana para saber cuando esta en home o no
     private boolean booInstrucciones; // booleana para ver instrucciones
+    private boolean booCredits; // boleana para ver los creditos
     private boolean booStart; // booleana para ver niveles
     private boolean booSonido; // booleana para configuraciones de sonido
     private boolean booPlanetas; //booleana para los planetas
@@ -103,6 +104,9 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
         
         //inicialiaz la booleana de Planetas
         booPlanetas = false;
+        
+        // inicializa la booleana en falso
+        booCredits = false;
         
         // creo imagen de home
         URL urlImagenHome = this.getClass().getResource("Instrucciones/home.png");
@@ -239,6 +243,11 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
             booStart = true;
             booHome = true;
             booInstrucciones = false;
+        }
+        else if (icoCredits.colisiona(mouEvent.getX(), mouEvent.getY())){
+            booCredits = true;
+            booHome = true;
+            booStart = booInstrucciones = false;
         }
         else if(icoHome.colisiona(mouEvent.getX(), mouEvent.getY())){
             booHome = false;
@@ -379,6 +388,14 @@ public class JFrameEnglishSpaceBlaster extends JFrame implements Runnable, Mouse
                     g.drawImage(icoPlaneta4.getImagen(), icoPlaneta4.getX(),
                         icoPlaneta4.getY(), this);
                 }
+            }
+            else if(booCredits){
+                //System.out.println("sal");
+                URL urlImagenAyuda = this.getClass().getResource("Credits/Sprites_Videojuego.jpg");
+                Image imaImagenJuego = Toolkit.getDefaultToolkit().
+                                    getImage(urlImagenAyuda);
+                graDbg.drawImage(imaImagenJuego, 0, 0,
+                    getWidth(), getHeight(), this);
             }
           
             
