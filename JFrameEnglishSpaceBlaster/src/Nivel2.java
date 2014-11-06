@@ -3,11 +3,10 @@
 *  entrando por la puerta con la escritura correcta de la palabra desplegada en
 *  la ventana de la nave. Contara con tres vidas para completar su mision y 
 *  llegar a la nave por su puerta indicada. se movera usando las flechas
- */
-
-/**
- *
- * @author Lizzi_
+  *Daniela Reyes Alatorre	    	    		A00618321
+ *Norma Elizabeth  Morales Cruz 			A01195888
+ *Humberto Makoto Morimoto Burgos			A01280458
+ *Eduardo Andrade Martínez                    		A01035059
  */
 import java.awt.Graphics;
 import java.awt.Image;

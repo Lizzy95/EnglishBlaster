@@ -1,10 +1,9 @@
 /*
  * Memorama en el cual tendra qeu unir la imagen con la palabra que  la describa
- */
-
-/**
- *
- * @author Lizzi_
+  *Daniela Reyes Alatorre	    	    		A00618321
+ *Norma Elizabeth  Morales Cruz 			A01195888
+ *Humberto Makoto Morimoto Burgos			A01280458
+ *Eduardo Andrade Martínez                    		A01035059
  */
 import java.awt.Graphics;
 import java.awt.Image;
@@ -33,7 +32,8 @@ import java.awt.event.MouseMotionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Nivel3Final extends JFrame implements Runnable, MouseListener, MouseMotionListener {
+public class Nivel3Final extends JFrame implements Runnable, MouseListener, 
+        MouseMotionListener {
     
     private Animacion animPlaneta1; //objeto de la clase animacion
     private Animacion animplaneta2; // objero de la clase animacion de planeta

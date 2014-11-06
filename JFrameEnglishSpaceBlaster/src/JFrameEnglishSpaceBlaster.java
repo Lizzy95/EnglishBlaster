@@ -1,7 +1,9 @@
 
 /**
- *
- * @author Lizzi_
+  *Daniela Reyes Alatorre	    	    		A00618321
+ *Norma Elizabeth  Morales Cruz 			A01195888
+ *Humberto Makoto Morimoto Burgos			A01280458
+ *Eduardo Andrade Martínez                    		A01035059
  */
 import java.awt.Graphics;
 import java.awt.Image;

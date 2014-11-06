@@ -1,10 +1,10 @@
 /*
+ *Daniela Reyes Alatorre	    	    		A00618321
+ *Norma Elizabeth  Morales Cruz 			A01195888
+ *Humberto Makoto Morimoto Burgos			A01280458
+ *Eduardo Andrade Martínez                    		A01035059
  * Memorama en el cual tendra qeu unir la imagen con la palabra que  la describa
- */
 
-/**
- *
- * @author Lizzi_
  */
 import java.awt.Graphics;
 import java.awt.Image;

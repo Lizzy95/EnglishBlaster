@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * T *Daniela Reyes Alatorre	    	    		A00618321
+ *Norma Elizabeth  Morales Cruz 			A01195888
+ *Humberto Makoto Morimoto Burgos			A01280458
+ *Eduardo Andrade Martínez                    		A01035059
  */
 
 /**

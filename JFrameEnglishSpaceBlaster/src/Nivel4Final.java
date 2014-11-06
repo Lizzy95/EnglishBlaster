@@ -1,13 +1,11 @@
 /*
+ *Daniela Reyes Alatorre	    	    		A00618321
+ *Norma Elizabeth  Morales Cruz 			A01195888
+ *Humberto Makoto Morimoto Burgos			A01280458
+ *Eduardo Andrade Martínez                    		A01035059
  * Tres naves las cuales tendranuna imagen cada una de ellas asi como tambin 
  * con tres agujeros negros el usuario tendra que jalar la nave hacia el agujero 
  * negro que contenga la palabra que corresponda con la nave
- *
- */
-
-/**
- *
- * @author Lizzi_
  */
 import java.awt.Graphics;
 import java.awt.Image;
